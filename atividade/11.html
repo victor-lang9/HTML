@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Cadastro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .erro {
+      color: red;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    .checkbox {
+      margin: 10px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0077cc;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .sucesso {
+      color: green;
+      font-size: 1em;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="formCadastro">
+    <h2>Cadastro</h2>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome">
+    <div id="erroNome" class="erro"></div>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email">
+    <div id="erroEmail" class="erro"></div>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha">
+    <div id="erroSenha" class="erro"></div>
+
+    <label for="confirmarSenha">Confirmar Senha:</label>
+    <input type="password" id="confirmarSenha" name="confirmarSenha">
+    <div id="erroConfirmacao" class="erro"></div>
+
+    <div class="checkbox">
+      <input type="checkbox" id="mostrarSenha"> Mostrar senha
+    </div>
+
+    <button type="submit">Cadastrar</button>
+
+    <div id="mensagemSucesso" class="sucesso"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('formCadastro');
+
+    const nomeInput = document.getElementById('nome');
+    const emailInput = document.getElementById('email');
+    const senhaInput = document.getElementById('senha');
+    const confirmarSenhaInput = document.getElementById('confirmarSenha');
+
+    const erroNome = document.getElementById('erroNome');
+    const erroEmail = document.getElementById('erroEmail');
+    const erroSenha = document.getElementById('erroSenha');
+    const erroConfirmacao = document.getElementById('erroConfirmacao');
+    const mensagemSucesso = document.getElementById('mensagemSucesso');
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const senhaRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+    // Mostrar/ocultar senha
+    document.getElementById('mostrarSenha').addEventListener('change', function () {
+      const tipo = this.checked ? 'text' : 'password';
+      senhaInput.type = tipo;
+      confirmarSenhaInput.type = tipo;
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Evita o envio do formulário
+
+      // Limpar mensagens anteriores
+      erroNome.textContent = '';
+      erroEmail.textContent = '';
+      erroSenha.textContent = '';
+      erroConfirmacao.textContent = '';
+      mensagemSucesso.textContent = '';
+
+      let valido = true;
+
+      // Validação do nome
+      if (nomeInput.value.trim().length < 3) {
+        erroNome.textContent = 'O nome deve ter pelo menos 3 caracteres.';
+        valido = false;
+      }
+
+      // Validação do email
+      if (!emailRegex.test(emailInput.value.trim())) {
+        erroEmail.textContent = 'E-mail inválido.';
+        valido = false;
+      }
+
+      // Validação da senha
+      if (!senhaRegex.test(senhaInput.value)) {
+        erroSenha.textContent = 'A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.';
+        valido = false;
+      }
+
+      // Confirmação da senha
+      if (senhaInput.value !== confirmarSenhaInput.value) {
+        erroConfirmacao.textContent = 'As senhas não coincidem.';
+        valido = false;
+      }
+
+      // Se tudo estiver válido
+      if (valido) {
+        mensagemSucesso.textContent = 'Cadastro realizado com sucesso!';
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>

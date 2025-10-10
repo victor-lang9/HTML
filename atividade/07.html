@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .caixa {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="caixa">
+        <img src="https://mystickermania.com/cdn/stickers/69-512x512.png" alt="">
+    <p></p>
+    </div>
+
+    <script>
+        let waddles = document.querySelector("img")
+        let texto = document.querySelector("p")
+
+        waddles.addEventListener("mouseenter", () => {
+            texto.innerText = "Sai pra lá"
+        })
+
+        waddles.addEventListener("mousemove", () => {
+            texto.innerText = "Você está muito perto"
+        })
+
+        waddles.addEventListener("mouseleave", () => {
+            texto.innerText = "Queria uma cosquinha"
+        })
+
+        waddles.addEventListener("click", () => {
+            texto.innerText = "Isso faz muita cosquinha hahahah"
+        })
+    </script>
+</body>
+</html>

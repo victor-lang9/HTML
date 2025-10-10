@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 4</title>
+</head>
+<body>
+    <p>0</p>
+    <button id="contagem">Clique para somar</button>
+    <button id="zerar">Reiniciar</button>
+
+    <script>
+        let botaoContagem = document.querySelector('#contagem')
+        let botaoZerar = document.querySelector('#zerar')
+        let paragrafo = document.querySelector('p')
+        let contador = 0;
+
+        botaoContagem.addEventListener('click', function() {
+            contador++
+            paragrafo.innerText = contador;
+        })
+
+        botaoZerar.addEventListener('click', function() {
+            contador = 0;
+            paragrafo.innerText = contador;
+        })
+
+        
+    </script>
+</body>
+</html>

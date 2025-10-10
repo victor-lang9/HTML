@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificador de Sabor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f7f7f7;
+    }
+
+    label, input {
+      font-size: 18px;
+    }
+
+    input {
+      padding: 10px;
+      width: 300px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    #mensagem {
+      font-size: 20px;
+      color: #444;
+      background-color: #eaeaea;
+      padding: 15px;
+      border-radius: 5px;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Digite o sabor de sorvete</h1>
+  <label for="saborInput">Sabor:</label>
+  <input type="text" id="saborInput" placeholder="Digite aqui...">
+  <div id="mensagem"></div>
+
+  <script>
+    const input = document.getElementById('saborInput');
+    const mensagem = document.getElementById('mensagem');
+
+    input.addEventListener('input', () => {
+      const texto = input.value.trim().toLowerCase();
+
+      if (texto.length > 3) {
+        if (texto === 'chocolate') {
+          mensagem.textContent = 'Eu amo sorvete de chocolate!';
+        } else if (texto === 'flocos') {
+          mensagem.textContent = 'Ahh, mas chocolate é o meu favorito...';
+        } else {
+          mensagem.textContent = 'Ahh, eu esperava um sabor de sorvete...';
+        }
+      } else {
+        mensagem.textContent = ''; 
+      }
+    });
+  </script>
+
+</body>
+</html>
